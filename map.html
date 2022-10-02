@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>3Dview</title>
+
+	<style>
+		html,
+		body,
+		#viewDiv {
+			padding: 0;
+			margin: 0;
+			height: 100%;
+			width: 100%;
+		}
+
+		#back {
+			position: absolute;
+			bottom: 20px;
+		}
+
+		#back i {
+			background-image: url(app/public/img/back.svg);
+			background-repeat: no-repeat;
+			display: inline-block;
+			width: 100px;
+			height: 25px;
+			padding-left: 25px;
+			padding-top: 2px;
+			margin: 10px;
+			cursor: pointer;
+			background-size: 20px;
+		}
+	</style>
+
+	<link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/themes/light/main.css" />
+	<script src="https://js.arcgis.com/4.16/"></script>
+
+	<script>
+		require([
+			"esri/Map",
+			"esri/views/SceneView",
+			"esri/layers/GeoJSONLayer",
+			"esri/layers/SceneLayer", "esri/layers/GraphicsLayer", "esri/Graphic", "esri/request"
+		], function (Map, SceneView, GeoJSONLayer, SceneLayer,
+			GraphicsLayer, Graphic, esriRequest) {
+			var url = 'http://localhost:3000/';
+			var urlGeo = 'http://localhost:3000/';
+			var urlJS = 'http://localhost:3000/';
+
+			//renderer
+			const cotthuong_p1_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 6.13876442093,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			};
+			const cotthuong_p2_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.223610511195034,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			};
+			const cotthuong_p3_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.5,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			};
+			const cotthuong_p4_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 5.20523710960674,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			};
+
+			var createGraphic = function (data) {
+				return new Graphic({
+					geometry: data,
+					symbol: data.symbol,
+					attributes: data
+				});
+			};
+
+			function getJsonData(param, onCloud = false) {
+				//true when call api via server false when call via json-server localhost
+				let _url;
+				if (onCloud) _url = urlJS;
+				else _url = url;
+
+				esriRequest(_url + param, json_options).then(function (response) {
+					var graphicsLayer = new GraphicsLayer();
+					// console.log(_url + param);
+					// console.log(response);
+					if (onCloud) {
+						response.data[0].data.forEach(function (data) {
+							graphicsLayer.add(createGraphic(data));
+						});
+					}
+					else {
+						response.data.forEach(function (data) {
+							graphicsLayer.add(createGraphic(data));
+						});
+					}
+					map.add(graphicsLayer);
+				});
+			}
+
+			function getGeoJsonData(param, rendererType, onCloud = false) {
+				let _url;
+				if (onCloud) _url = urlGeo;
+				else _url = url;
+
+				const newGeoJsonLayer = new GeoJSONLayer({
+					url: _url + param
+				});
+				newGeoJsonLayer.renderer = rendererType;
+				map.layers.add(newGeoJsonLayer);
+			}
+
+			//declare
+			const json_options = {
+				query: {
+					f: "json"
+				},
+				responseType: "json"
+			};
+
+			const map = new Map({
+				basemap: "dark-gray-vector",
+				layers: [] //end layers
+			});
+
+
+			// request json
+			getJsonData("mainha");
+			getJsonData("cungtroncuachinh");
+			getJsonData("cungtroncuachinhm");
+			// getJsonData("tamtuongtraitruoc");
+			// getJsonData("tamtuongtraitruocm");
+			// getJsonData("cua1");
+			// getJsonData("cua1m");
+			// getJsonData("cuasogiua");
+			// getJsonData("cuasogiuam");
+
+			//request geojson
+			// cot thuong
+			for (let i = 1; i <= 17; i++) {
+				getGeoJsonData("cotthuong_p1_" + i, cotthuong_p1_renderer);
+				getGeoJsonData("cotthuong_p2_" + i, cotthuong_p2_renderer);
+				getGeoJsonData("cotthuong_p3_" + i, cotthuong_p3_renderer);
+			}
+			for (let i = 1; i <= 17; i++) {
+				getGeoJsonData("cotthuong_p1m_" + i, cotthuong_p1_renderer);
+				getGeoJsonData("cotthuong_p2m_" + i, cotthuong_p2_renderer);
+				getGeoJsonData("cotthuong_p3m_" + i, cotthuong_p3_renderer);
+			}
+
+
+			getGeoJsonData("cungtroncuachinh_vVoxel_1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.965423274557224,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cungtroncuachinhm_vVoxel_1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.965423274557224,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cungtroncuachinh_hVoxel_1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.223610511195034,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cungtroncuachinhm_hVoxel_1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.223610511195034,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cungtroncuachinh_hVoxel_2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.223610511195034,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cungtroncuachinhm_hVoxel_2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.223610511195034,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cungtroncuachinh_hVoxel_5", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.765496929925849,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cungtroncuachinhm_hVoxel_5", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.765496929925849,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cungtroncuachinh_hVoxel_3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.73196642062237,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cungtroncuachinhm_hVoxel_3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.73196642062237,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cungtroncuachinh_hVoxel_4", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.508498193506739,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cungtroncuachinhm_hVoxel_4", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.508498193506739,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("tamtuongtraitruoc_vVoxel_1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 6.56284202812145,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("tamtuongtraitruocm_vVoxel_1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 6.56284202812145,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("tamtuongtraitruoc_vVoxel_2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 3.03353629159233,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("tamtuongtraitruocm_vVoxel_2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 3.03353629159233,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("tamtuongtraitruoc_vVoxel_3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.666060707546023,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("tamtuongtraitruocm_vVoxel_3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.666060707546023,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("tamtuongtraitruoc_vVoxel_4", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.5203680925394,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("tamtuongtraitruocm_vVoxel_4", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.5203680925394,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cuasogiua_voxel1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 9.30283542462,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cuasogiuam_voxel1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 9.30283542462,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cuasogiua_voxel2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.3,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cuasogiuam_voxel2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.3,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cuasogiua_voxel3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.62,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cuasogiuam_voxel3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.62,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotcuasogiua1_p1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.223607278854615,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotcuasogiuam1_p1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.223607278854615,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotcuasogiua2_p1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.223607278854615,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotcuasogiuam2_p1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.223607278854615,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotcuasogiua1_p2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 6.16731467345,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotcuasogiua2_p2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 6.16731467345,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotcuasogiuam1_p2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 6.16731467345,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotcuasogiuam2_p2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 6.16731467345,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotcuasogiua1_p3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.499830033168109,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotcuasogiua2_p3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.499830033168109,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotcuasogiuam1_p3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.499830033168109,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotcuasogiuam2_p3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.499830033168109,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("vombancongcuasogiua", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.26313556158859,
+							material: {
+								color: "#FFFFFF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("vombancongcuasogiuam", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.26313556158859,
+							material: {
+								color: "#FFFFFF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotbanconngcuasogiua1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 2.36464586534,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotbanconngcuasogiua2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 2.36464586534,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotbanconngcuasogiuam1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 2.36464586534,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotbanconngcuasogiuam2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 2.36464586534,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("bancong1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.4,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("bancong2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.4,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("bancongm1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.4,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("bancongm2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.4,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("nenbancong1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.1,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("nenbancongm1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.1,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+
+
+			cuasothuong_p1_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.683206149023935,
+							material: {
+								color: "#CCCCCC"
+							}
+						}
+					]
+				}
+			};
+			cuasothuong_p2_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 6.25,
+							material: {
+								color: "#E8E8E8"
+							}
+						}
+					]
+				}
+			};
+			cuasothuong_p3_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.6,
+							material: {
+								color: "#280000"
+							}
+						}
+					]
+				}
+			};
+			cuasothuong_p4_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.25,
+							material: {
+								color: "#E8E8E8"
+							}
+						}
+					]
+				}
+			};
+			cuasothuong_p5_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.19891273196142,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			};
+			for (let i = 1; i <= 10; i++) {
+				getGeoJsonData("cuasothuong" + i + "_p1", cuasothuong_p1_renderer);
+				getGeoJsonData("cuasothuong" + i + "_p2", cuasothuong_p2_renderer);
+				getGeoJsonData("cuasothuong" + i + "_p3", cuasothuong_p3_renderer);
+				getGeoJsonData("cuasothuong" + i + "_p4", cuasothuong_p4_renderer);
+				getGeoJsonData("cuasothuong" + i + "_p5", cuasothuong_p5_renderer);
+
+				getGeoJsonData("cuasothuong" + i + "m_p1", cuasothuong_p1_renderer);
+				getGeoJsonData("cuasothuong" + i + "m_p2", cuasothuong_p2_renderer);
+				getGeoJsonData("cuasothuong" + i + "m_p3", cuasothuong_p3_renderer);
+				getGeoJsonData("cuasothuong" + i + "m_p4", cuasothuong_p4_renderer);
+				getGeoJsonData("cuasothuong" + i + "m_p5", cuasothuong_p5_renderer);
+
+			}
+
+			cuasothuongbenhong_p1_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.7,
+							material: {
+								color: "#CCCCCC"
+							}
+						}
+					]
+				}
+			};
+			cuasothuongbenhong_p2_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.33212006826534,
+							material: {
+								color: "#BF903F"
+							}
+						}
+					]
+				}
+			};
+			cuasothuongbenhong_p3_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 7.5,
+							material: {
+								color: "#E8E8E8"
+							}
+						}
+					]
+				}
+			};
+			cuasothuongbenhong_p4_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.7,
+							material: {
+								color: "#280000"
+							}
+						}
+					]
+				}
+			};
+			cuasothuongbenhong_p5_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.25,
+							material: {
+								color: "#E8E8E8"
+							}
+						}
+					]
+				}
+			};
+			cuasothuongbenhong_p67_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.19890848603109,
+							material: {
+								color: "#E8E8E8"
+							}
+						}
+					]
+				}
+			};
+			for (let i = 1; i <= 7; i++) {
+				let ren;
+				if (i == 1) {
+					ren = cuasothuongbenhong_p1_renderer;
+				}
+				else if (i == 2) {
+					ren = cuasothuongbenhong_p2_renderer;
+				}
+				else if (i == 3) {
+					ren = cuasothuongbenhong_p3_renderer;
+				}
+				else if (i == 4) {
+					ren = cuasothuongbenhong_p4_renderer;
+				}
+				else if (i == 5) {
+					ren = cuasothuongbenhong_p5_renderer;
+				}
+				else if (i == 6 || i == 7) {
+					ren = cuasothuongbenhong_p67_renderer;
+				}
+				getGeoJsonData("cuasothuongbenhong1" + "_p" + i, ren);
+				getGeoJsonData("cuasothuongbenhong2" + "_p" + i, ren);
+
+				getGeoJsonData("cuasothuongbenhong1m" + "_p" + i, ren);
+				getGeoJsonData("cuasothuongbenhong2m" + "_p" + i, ren);
+			}
+
+			tuongsau_p1_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.68,
+							material: {
+								color: "#CCCCCC"
+							}
+						}
+					]
+				}
+			};
+			tuongsau_p2_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 9.29833402179147,
+							material: {
+								color: "#E8E8E8"
+							}
+						}
+					]
+				}
+			};
+			tuongsau_p3_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.77,
+							material: {
+								color: "#280000"
+							}
+						}
+					]
+				}
+			};
+			tuongsau_p4_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 3.666609101622,
+							material: {
+								color: [93, 45, 24, 0.7]
+							}
+						}
+					]
+				}
+			};
+			for (let j = 1; j <= 4; j++) {
+				let t_ren;
+				if (j == 1) {
+					t_ren = tuongsau_p1_renderer;
+				}
+				else if (j == 2) {
+					t_ren = tuongsau_p2_renderer;
+				}
+				else if (j == 3) {
+					t_ren = tuongsau_p3_renderer;
+				}
+				else if (j == 4) {
+					t_ren = tuongsau_p4_renderer;
+				}
+
+				getGeoJsonData("tuongsau1" + "_p" + j, t_ren);
+				getGeoJsonData("tuongsau2" + "_p" + j, t_ren);
+				getGeoJsonData("tuongsau3" + "_p" + j, t_ren);
+				getGeoJsonData("tuongsau4" + "_p" + j, t_ren);
+				getGeoJsonData("tuongsaugiua" + "_p" + j, t_ren);
+				getGeoJsonData("tuongsaugiua1" + "_p" + j, t_ren);
+			}
+
+			nenbancong_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.16752713038295,
+							material: {
+								color: "#E8E8E8"
+							}
+						}
+					]
+				}
+			};
+			raobancong_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.1,
+							material: {
+								color: "#380909"
+							}
+						}
+					]
+				}
+			};
+			getGeoJsonData("nenbancongsau", nenbancong_renderer);
+			getGeoJsonData("raobancongsau", raobancong_renderer);
+
+			tuongbenhongsau_p1_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.68,
+							material: {
+								color: "#CCCCCC"
+							}
+						}
+					]
+				}
+			};
+			tuongbenhongsau_p2_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 9.53308311246572,
+							material: {
+								color: "#E8E8E8"
+							}
+						}
+					]
+				}
+			};
+
+			getGeoJsonData("tuongbenhongsau1_p1", tuongbenhongsau_p1_renderer);
+			getGeoJsonData("tuongbenhongsau1_p2", tuongbenhongsau_p2_renderer);
+			getGeoJsonData("tuongbenhongsau2_p1", tuongbenhongsau_p1_renderer);
+			getGeoJsonData("tuongbenhongsau2_p2", tuongbenhongsau_p2_renderer);
+
+
+
+			tuongsau2ben_p1_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.68,
+							material: {
+								color: "#CCCCCC"
+							}
+						}
+					]
+				}
+			};
+			tuongsau2ben_p2_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 7.30465163457484,
+							material: {
+								color: "#E8E8E8"
+							}
+						}
+					]
+				}
+			};
+			tuongsau2ben_p3_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.77,
+							material: {
+								color: "#280000"
+							}
+						}
+					]
+				}
+			};
+			tuongsau2ben_p4_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.16752713038295,
+							material: {
+								color: "#E8E8E8"
+							}
+						}
+					]
+				}
+			};
+			tuongsau2ben_p5_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.1,
+							material: {
+								color: "#380909"
+							}
+						}
+					]
+				}
+			};
+			tuongsau2ben_p67_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 3.666609101622,
+							material: {
+								color: [93, 45, 24, 0.7]
+							}
+						}
+					]
+				}
+			};
+			for (let i = 1; i <= 7; i++) {
+				let renderer;
+				if (i == 1) {
+					renderer = tuongsau2ben_p1_renderer;
+				}
+				else if (i == 2) {
+					renderer = tuongsau2ben_p2_renderer;
+				}
+				else if (i == 3) {
+					renderer = tuongsau2ben_p3_renderer;
+				}
+				else if (i == 4) {
+					renderer = tuongsau2ben_p4_renderer;
+				}
+				else if (i == 5) {
+					renderer = tuongsau2ben_p5_renderer;
+				}
+				else if (i == 6 || i == 7) {
+					renderer = tuongsau2ben_p67_renderer;
+				}
+				getGeoJsonData("tuongsau2ben1" + "_p" + i, renderer);
+				getGeoJsonData("tuongsau2ben2" + "_p" + i, renderer);
+			}
+
+
+			tuongtruoc2ben_p1_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.666060166817758,
+							material: {
+								color: "#CCCCCC"
+							}
+						}
+					]
+				}
+			};
+			tuongtruoc2ben_p2_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 9.30283279845355,
+							material: {
+								color: "#E8E8E8"
+							}
+						}
+					]
+				}
+			};
+			tuongtruoc2ben_p3_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.0770465153063924,
+							material: {
+								color: "#FFFFFF"
+							}
+						}
+					]
+				}
+			};
+			tuongtruoc2ben_p4_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 2.58941954625732,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			};
+			tuongtruoc2ben_p5_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 2.58941954625732,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			};
+			tuongtruoc2ben_p6_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.12,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			};
+
+			for (let i = 1; i <= 11; i++) {
+				let tt_ren;
+				if (i == 1) {
+					tt_ren = tuongtruoc2ben_p1_renderer;
+				}
+				else if (i == 2) {
+					tt_ren = tuongtruoc2ben_p2_renderer;
+				}
+				else if (i == 3) {
+					tt_ren = tuongtruoc2ben_p3_renderer;
+				}
+				else if (i == 4) {
+					tt_ren = tuongtruoc2ben_p4_renderer;
+				}
+				else if (i == 5) {
+					tt_ren = tuongtruoc2ben_p5_renderer;
+				}
+				else if (i == 6) {
+					tt_ren = tuongtruoc2ben_p6_renderer;
+				}
+				getGeoJsonData("tuongtruoc2ben1" + "_p" + i, tt_ren);
+				getGeoJsonData("tuongtruoc2ben2" + "_p" + i, tt_ren);
+			}
+
+
+			cotto_p1_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.141842481825847,
+							material: {
+								color: "#FFFFFF"
+							}
+						}
+					]
+				}
+			};
+			cotto_p2_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.1,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			};
+			cotto_p3_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.99818093167981,
+							material: {
+								color: "#212121"
+							}
+						}
+					]
+				}
+			};
+			cotto_p4_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 3.15675019877472,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			};
+			cotto_p5_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.08,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			};
+			for (let k = 1; k <= 5; k++) {
+				let ct_ren;
+				if (k == 1) {
+					ct_ren = cotto_p1_renderer;
+				}
+				else if (k == 2) {
+					ct_ren = cotto_p2_renderer;
+				}
+				else if (k == 3) {
+					ct_ren = cotto_p3_renderer;
+				}
+				else if (k == 4) {
+					ct_ren = cotto_p4_renderer;
+				}
+				else if (k == 5) {
+					ct_ren = cotto_p5_renderer;
+				}
+
+				getGeoJsonData("cotto1" + "_p" + k, ct_ren);
+				getGeoJsonData("cotto2" + "_p" + k, ct_ren);
+			}
+
+
+			getGeoJsonData("cotvuongto1_p1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.5,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotvuongto1_p2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.223609932556371,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotvuongto1_p3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 5.43,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotvuongto2_p1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.5,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotvuongto2_p2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.223609932556371,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("cotvuongto2_p3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 5.43,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			});
+
+
+			cottronto_p1_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.175788900060269,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			};
+			cottronto_p2_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.2,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			};
+			cottronto_p3_renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 5.19877754113099,
+							material: {
+								color: "#F5CF8D"
+							}
+						}
+					]
+				}
+			};
+
+			for (let l = 1; l <= 4; l++) {
+				getGeoJsonData("cottronto" + l + "_p1", cottronto_p1_renderer);
+				getGeoJsonData("cottronto" + l + "_p2", cottronto_p2_renderer);
+				getGeoJsonData("cottronto" + l + "_p3", cottronto_p3_renderer);
+			}
+
+			getGeoJsonData("nenbancongtruoc", nenbancong_renderer);
+			getGeoJsonData("raobancongtruoc", raobancong_renderer);
+
+			getGeoJsonData("cuachinhvabancong", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 8,
+							material: {
+								color: [93, 45, 24, 0.3]
+							}
+						}
+					]
+				}
+			});
+			getGeoJsonData("hoatietcuachinh", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 2.5,
+							material: {
+								color: "#57ACA4"
+							}
+						}
+					]
+				}
+			});
+
+			for (let lev = 1; lev <= 18; lev++) {
+				getGeoJsonData("themto" + lev, {
+					type: "simple",
+					symbol: {
+						type: "polygon-3d",
+						symbolLayers: [
+							{
+								type: "extrude",
+								size: 0.0740066999447606,
+								material: {
+									color: "#6B6B6B"
+								}
+							}
+						]
+					}
+				});
+			}
+			for (let slev = 1; slev <= 4; slev++) {
+				getGeoJsonData("themnho" + slev, {
+					type: "simple",
+					symbol: {
+						type: "polygon-3d",
+						symbolLayers: [
+							{
+								type: "extrude",
+								size: 0.0740066999447606,
+								material: {
+									color: "#6B6B6B"
+								}
+							}
+						]
+					}
+				});
+			}
+
+			getGeoJsonData("tuong2bentruoc1", {
+					type: "simple",
+					symbol: {
+						type: "polygon-3d",
+						symbolLayers: [
+							{
+								type: "extrude",
+								size: 7.3,
+								material: {
+									color: "#F4F2EF"
+								}
+							}
+						]
+					}
+				});
+			getGeoJsonData("tuong2bentruoc2", {
+					type: "simple",
+					symbol: {
+						type: "polygon-3d",
+						symbolLayers: [
+							{
+								type: "extrude",
+								size: 7.3,
+								material: {
+									color: "#F4F2EF"
+								}
+							}
+						]
+					}
+				});
+			
+				for (let n = 1; n <= 5; n++) {
+				getGeoJsonData("nennha" + n, {
+					type: "simple",
+					symbol: {
+						type: "polygon-3d",
+						symbolLayers: [
+							{
+								type: "extrude",
+								size: 2,
+								material: {
+									color: "#BF903F"
+								}
+							}
+						]
+					}
+				});
+			}
+
+			getGeoJsonData("nennha6", {
+					type: "simple",
+					symbol: {
+						type: "polygon-3d",
+						symbolLayers: [
+							{
+								type: "extrude",
+								size: 2,
+								material: {
+									color: "#BF903F"
+								}
+							}
+						]
+					}
+				});
+				getGeoJsonData("nennha7", {
+					type: "simple",
+					symbol: {
+						type: "polygon-3d",
+						symbolLayers: [
+							{
+								type: "extrude",
+								size: 2,
+								material: {
+									color: "#BF903F"
+								}
+							}
+						]
+					}
+				});
+				getGeoJsonData("nennha8", {
+					type: "simple",
+					symbol: {
+						type: "polygon-3d",
+						symbolLayers: [
+							{
+								type: "extrude",
+								size: 2,
+								material: {
+									color: "#BF903F"
+								}
+							}
+						]
+					}
+				});
+				getGeoJsonData("nennha9", {
+					type: "simple",
+					symbol: {
+						type: "polygon-3d",
+						symbolLayers: [
+							{
+								type: "extrude",
+								size: 2,
+								material: {
+									color: "#BF903F"
+								}
+							}
+						]
+					}
+				});
+				getGeoJsonData("nennha10", {
+					type: "simple",
+					symbol: {
+						type: "polygon-3d",
+						symbolLayers: [
+							{
+								type: "extrude",
+								size: 2,
+								material: {
+									color: "#BF903F"
+								}
+							}
+						]
+					}
+				});
+			getGeoJsonData("maiche", {
+					type: "simple",
+					symbol: {
+						type: "polygon-3d",
+						symbolLayers: [
+							{
+								type: "extrude",
+								size: 3,
+								material: {
+									color: "#F4F2EF"
+								}
+							}
+						]
+					}
+				});
+
+			//view
+			const view = new SceneView({
+				container: "viewDiv",
+				map: map,
+				camera: {
+					position: [106.70316314697266, 10.776548385620118, 100],
+					heading: 0,
+					tilt: 0
+				}
+			});
+
+			view.popup.defaultPopupTemplateEnabled = true;
+		});
+
+	</script>
+</head>
+
+<body>
+	<div id="viewDiv"></div>
+</body>
+
+</html>
