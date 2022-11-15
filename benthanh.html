@@ -92,6 +92,7 @@
 				const newGeoJsonLayer = new GeoJSONLayer({
 					url: _url + param
 				});
+				console.log("🚀 ~ file: benthanh.html ~ line 95 ~ getGeoJsonData ~ newGeoJsonLayer",{ render:{...newGeoJsonLayer.renderer}})
 				newGeoJsonLayer.renderer = rendererType;
 				map.layers.add(newGeoJsonLayer);
 			}
@@ -112,6 +113,54 @@
 
 			// request json
 		getJsonData("mainha");
+		// getJsonData("lock_face");
+		// getJsonData("front-door_face");
+		// getGeoJsonData("dongho_1",{
+		// 		type: "simple",
+		// 		symbol: {
+		// 			type: "polygon-3d",
+		// 			symbolLayers: [
+		// 				{
+		// 					type: "extrude",
+		// 					size: 0.21032673026038,
+		// 					material: {
+		// 						color: "#F5CF8D"
+		// 					}
+		// 				}
+		// 			]
+		// 		}
+		// 	})
+		// getGeoJsonData("dongho_2",{
+		// 		type: "simple",
+		// 		symbol: {
+		// 			type: "polygon-3d",
+		// 			symbolLayers: [
+		// 				{
+		// 					type: "extrude",
+		// 					size: 0.343910849289387,
+		// 					material: {
+		// 						color: "#F5CF8D"
+		// 					}
+		// 				}
+		// 			]
+		// 		}
+		// 	})
+		// getGeoJsonData("cube",{
+		// 		type: "simple",
+		// 		symbol: {
+		// 			type: "polygon-3d",
+		// 			symbolLayers: [
+		// 				{
+		// 					type: "extrude",
+		// 					size: 20.1032673026038,
+		// 					material: {
+		// 						color: "#F4F2EF"
+		// 					}
+		// 				}
+		// 			]
+		// 		}
+		// 	})
+
 
 
 
