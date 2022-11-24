@@ -92,9 +92,40 @@
 				const newGeoJsonLayer = new GeoJSONLayer({
 					url: _url + param
 				});
-				console.log("🚀 ~ file: benthanh.html ~ line 95 ~ getGeoJsonData ~ newGeoJsonLayer",{ render:{...newGeoJsonLayer.renderer}})
+				
 				newGeoJsonLayer.renderer = rendererType;
 				map.layers.add(newGeoJsonLayer);
+			}
+
+				function getGeoJsonDataWithRenderType(param, rendererType, onCloud = false) {
+				let _url;
+				if (onCloud) _url = urlGeo;
+				else _url = url;
+				
+				const dataUrl = fetch(_url + param).then((data )=> {
+					 data.json().then(json => {
+						 	const newGeoJsonLayer = new GeoJSONLayer({url: _url + param});
+				
+				newGeoJsonLayer.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: json.features[0].properties.height,
+							material: {
+								color: json.features[0].properties.color || "#F4F2EF",
+							}
+						}
+					]
+				}
+			}
+				map.layers.add(newGeoJsonLayer);
+
+				}) 
+				})
+			
 			}
 
 			//declare
@@ -191,7 +222,13 @@
 				}
 			})
 
+			for (let index = 3; index <= 9; index++) {
+				
+				getGeoJsonDataWithRenderType("front_gate"+index)
+			}
 
+			// getGeoJsonDataWithRenderType("front_gate9")
+	
 
 
 			//view
