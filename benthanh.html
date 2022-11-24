@@ -50,7 +50,7 @@
 			var urlGeo = 'http://localhost:3000/';
 			var urlJS = 'http://localhost:3000/';
 
-		
+
 
 			var createGraphic = function (data) {
 				return new Graphic({
@@ -92,7 +92,7 @@
 				const newGeoJsonLayer = new GeoJSONLayer({
 					url: _url + param
 				});
-				console.log("🚀 ~ file: benthanh.html ~ line 95 ~ getGeoJsonData ~ newGeoJsonLayer",{ render:{...newGeoJsonLayer.renderer}})
+				console.log("🚀 ~ file: benthanh.html ~ line 95 ~ getGeoJsonData ~ newGeoJsonLayer", { render: { ...newGeoJsonLayer.renderer } })
 				newGeoJsonLayer.renderer = rendererType;
 				map.layers.add(newGeoJsonLayer);
 			}
@@ -112,40 +112,40 @@
 
 
 			// request json
-		getJsonData("mainha");
-		// getJsonData("lock_face");
-		// getJsonData("front-door_face");
-		// getGeoJsonData("dongho_1",{
-		// 		type: "simple",
-		// 		symbol: {
-		// 			type: "polygon-3d",
-		// 			symbolLayers: [
-		// 				{
-		// 					type: "extrude",
-		// 					size: 0.21032673026038,
-		// 					material: {
-		// 						color: "#F5CF8D"
-		// 					}
-		// 				}
-		// 			]
-		// 		}
-		// 	})
-		// getGeoJsonData("dongho_2",{
-		// 		type: "simple",
-		// 		symbol: {
-		// 			type: "polygon-3d",
-		// 			symbolLayers: [
-		// 				{
-		// 					type: "extrude",
-		// 					size: 0.343910849289387,
-		// 					material: {
-		// 						color: "#F5CF8D"
-		// 					}
-		// 				}
-		// 			]
-		// 		}
-		// 	})
-		getGeoJsonData("front_gate1",{
+			getJsonData("mainha");
+			// getJsonData("lock_face");
+			// getJsonData("front-door_face");
+			// getGeoJsonData("dongho_1",{
+			// 		type: "simple",
+			// 		symbol: {
+			// 			type: "polygon-3d",
+			// 			symbolLayers: [
+			// 				{
+			// 					type: "extrude",
+			// 					size: 0.21032673026038,
+			// 					material: {
+			// 						color: "#F5CF8D"
+			// 					}
+			// 				}
+			// 			]
+			// 		}
+			// 	})
+			// getGeoJsonData("dongho_2",{
+			// 		type: "simple",
+			// 		symbol: {
+			// 			type: "polygon-3d",
+			// 			symbolLayers: [
+			// 				{
+			// 					type: "extrude",
+			// 					size: 0.343910849289387,
+			// 					material: {
+			// 						color: "#F5CF8D"
+			// 					}
+			// 				}
+			// 			]
+			// 		}
+			// 	})
+			getGeoJsonData("front_gate1", {
 				type: "simple",
 				symbol: {
 					type: "polygon-3d",
@@ -160,7 +160,7 @@
 					]
 				}
 			})
-		getGeoJsonData("left_gate1",{
+			getGeoJsonData("left_gate1", {
 				type: "simple",
 				symbol: {
 					type: "polygon-3d",
@@ -175,14 +175,30 @@
 					]
 				}
 			})
-		getGeoJsonData("front_gate2",{
+			getGeoJsonData("front_gate2", {
 				type: "simple",
 				symbol: {
 					type: "polygon-3d",
 					symbolLayers: [
 						{
 							type: "extrude",
-							size:  20.1032673026038,
+							size: 20.1032673026038,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			})
+			//them
+			getGeoJsonData("a", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.50182962396684161,
 							material: {
 								color: "#F4F2EF"
 							}
@@ -191,8 +207,85 @@
 				}
 			})
 
+			getGeoJsonData("b", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.50182962396684161,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			})
 
+			getGeoJsonData("c", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.50182962396684161,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			})
 
+			getGeoJsonData("d", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.50182962396684161,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			})
+
+			getGeoJsonData("e", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.23809312066896382,
+							material: {
+								color: "#ed5334"
+							}
+						}
+					]
+				}
+			})
+
+			getGeoJsonData("f", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.23809312066896382,
+							material: {
+								color: "#ed5334"
+							}
+						}
+					]
+				}
+			})
 
 			//view
 			const view = new SceneView({
