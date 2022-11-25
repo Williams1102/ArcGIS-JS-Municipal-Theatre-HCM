@@ -144,53 +144,8 @@
 
 			// request json
 			getJsonData("mainha");
-			// getJsonData("lock_face");
-			// getJsonData("front-door_face");
-			// getGeoJsonData("dongho_1",{
-			// 		type: "simple",
-			// 		symbol: {
-			// 			type: "polygon-3d",
-			// 			symbolLayers: [
-			// 				{
-			// 					type: "extrude",
-			// 					size: 0.21032673026038,
-			// 					material: {
-			// 						color: "#F5CF8D"
-			// 					}
-			// 				}
-			// 			]
-			// 		}
-			// 	})
-			// getGeoJsonData("dongho_2",{
-			// 		type: "simple",
-			// 		symbol: {
-			// 			type: "polygon-3d",
-			// 			symbolLayers: [
-			// 				{
-			// 					type: "extrude",
-			// 					size: 0.343910849289387,
-			// 					material: {
-			// 						color: "#F5CF8D"
-			// 					}
-			// 				}
-			// 			]
-			// 		}
-			// 	})
-			getGeoJsonData("front_gate1", {
-				type: "simple",
-				symbol: {
-					type: "polygon-3d",
-					symbolLayers: [
-						{
-							type: "extrude",
-							size: 3.9,
-							material: {
-								color: "#F4F2EF"
-							}
-						}
-					]
-				}
-			})
+		
+			
 			getGeoJsonData("left_gate1", {
 				type: "simple",
 				symbol: {
@@ -206,21 +161,7 @@
 					]
 				}
 			})
-			getGeoJsonData("front_gate2", {
-				type: "simple",
-				symbol: {
-					type: "polygon-3d",
-					symbolLayers: [
-						{
-							type: "extrude",
-							size: 20.1032673026038,
-							material: {
-								color: "#F4F2EF"
-							}
-						}
-					]
-				}
-			})
+		
 			//them
 			getGeoJsonData("a", {
 				type: "simple",
@@ -270,10 +211,12 @@
 				}
 			})
 
-				for (let index = 3; index <= 13; index++) {
+				for (let index = 1; index <= 14; index++) {
 				
 				getGeoJsonDataWithRenderType("front_gate"+index)
 			}
+			getGeoJsonDataWithRenderType("lock_tower0")
+			getGeoJsonDataWithRenderType("lock_tower1")
 
 			getGeoJsonData("d", {
 				type: "simple",
