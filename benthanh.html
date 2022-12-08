@@ -1178,6 +1178,349 @@
 					]
 				}
 			})
+
+				//graphic layer
+			esriRequest('http://localhost:3000/tru1cube1', json_options).then(function (response) {
+				var graphicsLayer = new GraphicsLayer();
+				console.log(response);
+				response.data.forEach(function (data) {
+					graphicsLayer.add(createGraphic(data));
+				});
+
+				map.add(graphicsLayer);
+			}); // tru ben trai cong ra vao
+
+
+			esriRequest('http://localhost:3000/tru1thanhngang', json_options).then(function (response) {
+				var graphicsLayer = new GraphicsLayer();
+				console.log(response);
+				response.data.forEach(function (data) {
+					graphicsLayer.add(createGraphic(data));
+				});
+
+				map.add(graphicsLayer);
+			}); // tru ben trai thanh chan ngang phia tren
+
+			esriRequest('http://localhost:3000/tru3cube1', json_options).then(function (response) {
+				var graphicsLayer = new GraphicsLayer();
+				console.log(response);
+				response.data.forEach(function (data) {
+					graphicsLayer.add(createGraphic(data));
+				});
+
+				map.add(graphicsLayer);
+			}); // tru ben trai phia trong cong ra vao
+
+			esriRequest('http://localhost:3000/tru13uppercube1', json_options).then(function (response) {
+				var graphicsLayer = new GraphicsLayer();
+				console.log(response);
+				response.data.forEach(function (data) {
+					graphicsLayer.add(createGraphic(data));
+				});
+
+				map.add(graphicsLayer);
+			}); // tru ben trai phia trong cong ra vao
+
+
+			esriRequest('http://localhost:3000/tru14uppercube2', json_options).then(function (response) {
+				var graphicsLayer = new GraphicsLayer();
+				console.log(response);
+				response.data.forEach(function (data) {
+					graphicsLayer.add(createGraphic(data));
+				});
+
+				map.add(graphicsLayer);
+			}); // tru ben phai phia trong cong ra vao
+
+
+			esriRequest('http://localhost:3000/tru2cube1', json_options).then(function (response) {
+				var graphicsLayer = new GraphicsLayer();
+				console.log(response);
+				response.data.forEach(function (data) {
+					graphicsLayer.add(createGraphic(data));
+				});
+
+				map.add(graphicsLayer);
+			}); // tru ben phai cong ra vao
+
+			esriRequest('http://localhost:3000/tru2thanhngang', json_options).then(function (response) {
+				var graphicsLayer = new GraphicsLayer();
+				console.log(response);
+				response.data.forEach(function (data) {
+					graphicsLayer.add(createGraphic(data));
+				});
+
+				map.add(graphicsLayer);
+			}); // tru ben phai thanh chan ngang phia tren
+
+			esriRequest('http://localhost:3000/tru4cube1', json_options).then(function (response) {
+				var graphicsLayer = new GraphicsLayer();
+				console.log(response);
+				response.data.forEach(function (data) {
+					graphicsLayer.add(createGraphic(data));
+				});
+
+				map.add(graphicsLayer);
+			}); // tru ben phai phia trong cong ra vao
+
+			// geojson layer
+			const congdongtrubentraitru1 = new GeoJSONLayer({
+				url: "http://localhost:3000/tru1cube2"
+			});
+
+			const congdongtrubentraitru2 = new GeoJSONLayer({
+				url: "http://localhost:3000/tru1cube3"
+			});
+
+			const congdongtrubentraikhoibentren = new GeoJSONLayer({
+				url: "http://localhost:3000/tru1cube4"
+			});
+
+			const congdongtrubentraikhoihinhbentren = new GeoJSONLayer({
+				url: "http://localhost:3000/tru1cube5"
+			});
+
+			congdongtrubentraitru1.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 7.38675473252897,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			congdongtrubentraitru2.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 7.38675473252897,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			congdongtrubentraikhoibentren.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 2.33913145899714,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			congdongtrubentraikhoihinhbentren.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.810635923246082,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			map.layers.add(congdongtrubentraitru1);
+			map.layers.add(congdongtrubentraitru2);
+			map.layers.add(congdongtrubentraikhoibentren);
+			map.layers.add(congdongtrubentraikhoihinhbentren);
+
+			const congdongtrubenphaitru1 = new GeoJSONLayer({
+				url: "http://localhost:3000/tru2cube2"
+			});
+
+			const congdongtrubenphaitru2 = new GeoJSONLayer({
+				url: "http://localhost:3000/tru2cube3"
+			});
+
+			const congdongtrubenphaikhoibentren = new GeoJSONLayer({
+				url: "http://localhost:3000/tru2cube4"
+			});
+
+			const congdongtrubenphaikhoihinhbentren = new GeoJSONLayer({
+				url: "http://localhost:3000/tru2cube5"
+			});
+
+			congdongtrubenphaitru1.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 7.38675473252897,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			congdongtrubenphaitru2.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 7.38675473252897,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			congdongtrubenphaikhoibentren.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 2.33913145899714,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			congdongtrubenphaikhoihinhbentren.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.810635923246082,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			map.layers.add(congdongtrubenphaitru1);
+			map.layers.add(congdongtrubenphaitru2);
+			map.layers.add(congdongtrubenphaikhoibentren);
+			map.layers.add(congdongtrubenphaikhoihinhbentren);
+
+			const congdongtrubentraiphiatrongkhoitrubencanh1 = new GeoJSONLayer({
+				url: "http://localhost:3000/tru3cube2"
+			});
+
+			const congdongtrubentraiphiatrongkhoitrubencanh2 = new GeoJSONLayer({
+				url: "http://localhost:3000/tru3cube3"
+			});
+
+			congdongtrubentraiphiatrongkhoitrubencanh1.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 9.2334401843882,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			congdongtrubentraiphiatrongkhoitrubencanh2.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 5.29216601513417,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			map.layers.add(congdongtrubentraiphiatrongkhoitrubencanh1);
+			map.layers.add(congdongtrubentraiphiatrongkhoitrubencanh2);
+
+			const congdongtrubenphaiphiatrongkhoitrubencanh1 = new GeoJSONLayer({
+				url: "http://localhost:3000/tru4cube2"
+			});
+
+			const congdongtrubenphaiphiatrongkhoitrubencanh2 = new GeoJSONLayer({
+				url: "http://localhost:3000/tru4cube3"
+			});
+
+			congdongtrubenphaiphiatrongkhoitrubencanh1.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 9.2334401843882,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			congdongtrubenphaiphiatrongkhoitrubencanh2.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 5.29216601513417,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			map.layers.add(congdongtrubenphaiphiatrongkhoitrubencanh1);
+			map.layers.add(congdongtrubenphaiphiatrongkhoitrubencanh2);
+
+
 			
 			
 
