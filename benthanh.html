@@ -92,40 +92,40 @@
 				const newGeoJsonLayer = new GeoJSONLayer({
 					url: _url + param
 				});
-				
+
 				newGeoJsonLayer.renderer = rendererType;
 				map.layers.add(newGeoJsonLayer);
 			}
 
-				function getGeoJsonDataWithRenderType(param, rendererType, onCloud = false) {
+			function getGeoJsonDataWithRenderType(param, rendererType, onCloud = false) {
 				let _url;
 				if (onCloud) _url = urlGeo;
 				else _url = url;
-				
-				const dataUrl = fetch(_url + param).then((data )=> {
-					 data.json().then(json => {
-						 	const newGeoJsonLayer = new GeoJSONLayer({url: _url + param});
-				
-				newGeoJsonLayer.renderer = {
-				type: "simple",
-				symbol: {
-					type: "polygon-3d",
-					symbolLayers: [
-						{
-							type: "extrude",
-							size: json.features[0].properties.height,
-							material: {
-								color: json.features[0].properties.color || "#F4F2EF",
+
+				const dataUrl = fetch(_url + param).then((data) => {
+					data.json().then(json => {
+						const newGeoJsonLayer = new GeoJSONLayer({ url: _url + param });
+
+						newGeoJsonLayer.renderer = {
+							type: "simple",
+							symbol: {
+								type: "polygon-3d",
+								symbolLayers: [
+									{
+										type: "extrude",
+										size: json.features[0].properties.height,
+										material: {
+											color: json.features[0].properties.color || "#F4F2EF",
+										}
+									}
+								]
 							}
 						}
-					]
-				}
-			}
-				map.layers.add(newGeoJsonLayer);
+						map.layers.add(newGeoJsonLayer);
 
-				}) 
+					})
 				})
-			
+
 			}
 
 			//declare
@@ -144,8 +144,8 @@
 
 			// request json
 			getJsonData("mainha");
-		
-			
+
+
 			getGeoJsonData("left_gate1", {
 				type: "simple",
 				symbol: {
@@ -162,7 +162,7 @@
 				}
 			})
 		
-			//them khoi mai 
+			//them
 			getGeoJsonData("a", {
 				type: "simple",
 				symbol: {
@@ -211,10 +211,25 @@
 				}
 			})
 
-				for (let index = 1; index <= 14; index++) {
-				
-				getGeoJsonDataWithRenderType("front_gate"+index)
+			for (let index = 1; index <= 19; index++) {
+
+				getGeoJsonDataWithRenderType("front_gate" + index)
 			}
+			getGeoJsonDataWithRenderType("wall_front_right1")
+			getGeoJsonDataWithRenderType("wall_front_right2")
+			getGeoJsonDataWithRenderType("wall_front_right3")
+			getGeoJsonDataWithRenderType("wall_front_right4")
+			getGeoJsonDataWithRenderType("wall_front_right5")
+			getGeoJsonDataWithRenderType("wall_front_right6")
+			getGeoJsonDataWithRenderType("wall_front_right7")
+			getGeoJsonDataWithRenderType("wall_front_right8")
+			getGeoJsonDataWithRenderType("wall_front_right9")
+			getGeoJsonDataWithRenderType("wall_front_right10")
+
+			getGeoJsonDataWithRenderType("wall_front_left")
+			getGeoJsonDataWithRenderType("wall_back_right")
+			getGeoJsonDataWithRenderType("wall_back_left")
+
 			getGeoJsonDataWithRenderType("lock_tower0")
 			getGeoJsonDataWithRenderType("lock_tower1")
 
@@ -441,7 +456,7 @@
 					]
 				}
 			})
-			
+
 			getGeoJsonData("8", {
 				type: "simple",
 				symbol: {
@@ -697,7 +712,7 @@
 					]
 				}
 			})
-			
+
 			getGeoJsonData("24", {
 				type: "simple",
 				symbol: {
@@ -1163,43 +1178,8 @@
 					]
 				}
 			})
-
-			getGeoJsonData("Mainhanhotrai3", {
-				type: "simple",
-				symbol: {
-					type: "polygon-3d",
-					symbolLayers: [
-						{
-							type: "extrude",
-							size: 0.447440836616806,
-							material: {
-								color: "#ed5334"
-							}
-						}
-					]
-				}
-			})
 			
-			// request json buc tuong ben phai
-			// getJsonData("buctuongbenphaicuatruoc");
-				
-			getGeoJsonData("Buctuongtruocphai_1", {
-				type: "simple",
-				symbol: {
-					type: "polygon-3d",
-					symbolLayers: [
-						{
-							type: "extrude",
-							size: 1.8169318899581413,
-							material: {
-								color: "#F4F2EF"
-							}
-						}
-					]
-				}
-			})
-		
-					
+			
 
 			//view
 			const view = new SceneView({
