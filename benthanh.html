@@ -1178,7 +1178,41 @@
 					]
 				}
 			})
-
+				getGeoJsonData("Mainhanhotrai3", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.447440836616806,
+							material: {
+								color: "#ed5334"
+							}
+						}
+					]
+				}
+			})
+			
+			// request json buc tuong ben phai
+			// getJsonData("buctuongbenphaicuatruoc");
+				
+			getGeoJsonData("Buctuongtruocphai_1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.8169318899581413,
+							material: {
+								color: "#F4F2EF"
+							}
+						}
+					]
+				}
+			})
+/* ======================================TAN CODE =========================================== */
 				//graphic layer
 			esriRequest('http://localhost:3000/tru1cube1', json_options).then(function (response) {
 				var graphicsLayer = new GraphicsLayer();
@@ -1520,7 +1554,7 @@
 			map.layers.add(congdongtrubenphaiphiatrongkhoitrubencanh1);
 			map.layers.add(congdongtrubenphaiphiatrongkhoitrubencanh2);
 
-
+/*================================================================TRung Code====================================*/
 				// request json
 			esriRequest('http://localhost:3000/face1', json_options).then(function (response) {
 				var graphicsLayer = new GraphicsLayer();
