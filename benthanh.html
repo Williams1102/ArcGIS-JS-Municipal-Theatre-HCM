@@ -1241,7 +1241,6 @@
 				}
 			})
 			
-
 			getGeoJsonData("Buc_tuong_sau_trai_2", {
 				type: "simple",
 				symbol: {
@@ -1258,7 +1257,23 @@
 				}
 			})
 
-			getGeoJsonData("Buc_tuong_sau_trai_3", {
+			getGeoJsonData("Tuongtrencongsaubenphai", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.09325598603027,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			})
+
+			getGeoJsonData("congngoaiphiasaubenphai_1", {
 				type: "simple",
 				symbol: {
 					type: "polygon-3d",
@@ -1268,6 +1283,38 @@
 							size: 1.0932559860302717,
 							material: {
 								color: "#ffffff"
+							}
+						}
+					]
+				}
+			})
+
+			getGeoJsonData("congngoaiphiasaubenphai_1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.09325598603027,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			})
+
+			getGeoJsonData("congngoaiphiasaubenphai_2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 6.82558572860999,
+							material: {
+								color: "white"
 							}
 						}
 					]
@@ -1401,7 +1448,6 @@
 					]
 				}
 			})
-			
 			getGeoJsonData("Buc_tuong_sau_trai_12", {
 				type: "simple",
 				symbol: {
@@ -1577,7 +1623,6 @@
 					]
 				}
 			})
-
 /* ======================================TAN CODE =========================================== */
 				//graphic layer
 			esriRequest('http://localhost:3000/tru1cube1', json_options).then(function (response) {
