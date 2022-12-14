@@ -161,7 +161,7 @@
 					]
 				}
 			})
-		
+
 			//them
 			getGeoJsonData("a", {
 				type: "simple",
@@ -1082,7 +1082,7 @@
 				}
 			})
 
-			
+
 			getGeoJsonData("Mainhanhophai1", {
 				type: "simple",
 				symbol: {
@@ -1193,6 +1193,17 @@
 					]
 				}
 			})
+
+			esriRequest('http://localhost:3000/mainhasau', json_options).then(function (response) {
+				var graphicsLayer = new GraphicsLayer();
+				console.log(response);
+				response.data.forEach(function (data) {
+					graphicsLayer.add(createGraphic(data));
+				});
+				map.add(graphicsLayer);
+
+			});
+
 			getGeoJsonData("Nen_mai_nha_trai_sau", {
 				type: "simple",
 				symbol: {
@@ -1240,7 +1251,7 @@
 					]
 				}
 			})
-			
+
 			getGeoJsonData("Buc_tuong_sau_trai_2", {
 				type: "simple",
 				symbol: {
@@ -1257,23 +1268,7 @@
 				}
 			})
 
-			getGeoJsonData("Tuongtrencongsaubenphai", {
-				type: "simple",
-				symbol: {
-					type: "polygon-3d",
-					symbolLayers: [
-						{
-							type: "extrude",
-							size: 1.09325598603027,
-							material: {
-								color: "white"
-							}
-						}
-					]
-				}
-			})
-
-			getGeoJsonData("congngoaiphiasaubenphai_1", {
+			getGeoJsonData("Buc_tuong_sau_trai_3", {
 				type: "simple",
 				symbol: {
 					type: "polygon-3d",
@@ -1283,38 +1278,6 @@
 							size: 1.0932559860302717,
 							material: {
 								color: "#ffffff"
-							}
-						}
-					]
-				}
-			})
-
-			getGeoJsonData("congngoaiphiasaubenphai_1", {
-				type: "simple",
-				symbol: {
-					type: "polygon-3d",
-					symbolLayers: [
-						{
-							type: "extrude",
-							size: 1.09325598603027,
-							material: {
-								color: "white"
-							}
-						}
-					]
-				}
-			})
-
-			getGeoJsonData("congngoaiphiasaubenphai_2", {
-				type: "simple",
-				symbol: {
-					type: "polygon-3d",
-					symbolLayers: [
-						{
-							type: "extrude",
-							size: 6.82558572860999,
-							material: {
-								color: "white"
 							}
 						}
 					]
@@ -1495,7 +1458,7 @@
 					]
 				}
 			})
-			
+
 			getGeoJsonData("Buc_tuong_sau_trai_15", {
 				type: "simple",
 				symbol: {
@@ -1559,7 +1522,7 @@
 					]
 				}
 			})
-			
+
 			getGeoJsonData("Buc_tuong_sau_trai_19", {
 				type: "simple",
 				symbol: {
@@ -1607,7 +1570,7 @@
 					]
 				}
 			})
-			
+
 			getGeoJsonData("Buc_tuong_sau_trai_22", {
 				type: "simple",
 				symbol: {
@@ -1623,8 +1586,72 @@
 					]
 				}
 			})
-/* ======================================TAN CODE =========================================== */
-				//graphic layer
+			/* ======================================HUY CODE =========================================== */
+			getGeoJsonData("MaiSauPhiaDuoi_1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.896238807898953,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			})
+
+			getGeoJsonData("Tuongtrencongsaubenphai", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.09325598603027,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			})
+
+			getGeoJsonData("congngoaiphiasaubenphai_1", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.0932559860302717,
+							material: {
+								color: "#ffffff"
+							}
+						}
+					]
+				}
+			})
+
+			getGeoJsonData("congngoaiphiasaubenphai_2", {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 6.82558572860999,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			})
+			/* ======================================TAN CODE =========================================== */
+			//graphic layer
 			esriRequest('http://localhost:3000/tru1cube1', json_options).then(function (response) {
 				var graphicsLayer = new GraphicsLayer();
 				console.log(response);
@@ -1965,8 +1992,8 @@
 			map.layers.add(congdongtrubenphaiphiatrongkhoitrubencanh1);
 			map.layers.add(congdongtrubenphaiphiatrongkhoitrubencanh2);
 
-/*================================================================TRung Code====================================*/
-				// request json
+			/*================================================================TRung Code====================================*/
+			// request json
 			esriRequest('http://localhost:3000/face1', json_options).then(function (response) {
 				var graphicsLayer = new GraphicsLayer();
 				console.log(response);
@@ -1994,7 +2021,7 @@
 				map.add(graphicsLayer);
 
 			});
-			
+
 			// geojson layer
 			const geojsonLayer1 = new GeoJSONLayer({
 				url: "http://localhost:3000/cube1"
@@ -2026,7 +2053,7 @@
 			geojsonLayer10 = new GeoJSONLayer({
 				url: "http://localhost:3000/cube10"
 			})
-	
+
 			geojsonLayer1.renderer = {
 				type: "simple",
 				symbol: {
@@ -2177,7 +2204,7 @@
 					]
 				}
 			};
-		
+
 			map.layers.add(geojsonLayer1);
 			map.layers.add(geojsonLayer2);
 			map.layers.add(geojsonLayer3);
@@ -2188,7 +2215,7 @@
 			map.layers.add(geojsonLayer8);
 			map.layers.add(geojsonLayer9);
 			map.layers.add(geojsonLayer10);
-			
+
 
 			//view
 			const view = new SceneView({
