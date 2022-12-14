@@ -228,7 +228,7 @@
 
 			getGeoJsonDataWithRenderType("lock_tower0")
 			getGeoJsonDataWithRenderType("lock_tower1")
-			getGeoJsonDataWithRenderType("vong_cua_truoc")
+			// getGeoJsonDataWithRenderType("vong_cua_truoc")
 			getGeoJsonDataWithRenderType("vong_cua_truoc2")
 			getGeoJsonDataWithRenderType("cube_font_gate_1")
 			getGeoJsonDataWithRenderType("cube_font_gate_2")
@@ -1754,6 +1754,26 @@
 				map.add(graphicsLayer);
 			}); // tru ben phai phia trong cong ra vao
 
+			esriRequest('http://localhost:3000/congdongtuongtruoc1', json_options).then(function (response) {
+				var graphicsLayer = new GraphicsLayer();
+				console.log(response);
+				response.data.forEach(function (data) {
+					graphicsLayer.add(createGraphic(data));
+				});
+
+				map.add(graphicsLayer);
+			}); // cong dong tuong ben truoc
+
+			esriRequest('http://localhost:3000/congdongtuongtruoc3', json_options).then(function (response) {
+				var graphicsLayer = new GraphicsLayer();
+				console.log(response);
+				response.data.forEach(function (data) {
+					graphicsLayer.add(createGraphic(data));
+				});
+
+				map.add(graphicsLayer);
+			}); // cong dong tuong ben sau
+
 			// geojson layer
 			const congdongtrubentraitru1 = new GeoJSONLayer({
 				url: "http://localhost:3000/tru1cube2"
@@ -2010,6 +2030,48 @@
 
 			map.layers.add(congdongtrubenphaiphiatrongkhoitrubencanh1);
 			map.layers.add(congdongtrubenphaiphiatrongkhoitrubencanh2);
+
+			const congdongtuongtruockhoibentren = new GeoJSONLayer({
+				url: "http://localhost:3000/congdongtuongtruoc2"
+			});
+			const congdongtuongsaukhoibentren = new GeoJSONLayer({
+				url: "http://localhost:3000/congdongtuongtruoc4"
+			});
+
+			congdongtuongtruockhoibentren.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.09325598603027,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			congdongtuongsaukhoibentren.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.09325598603027,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+
+			map.layers.add(congdongtuongtruockhoibentren);
+			map.layers.add(congdongtuongsaukhoibentren);
 
 			/*================================================================TRung Code====================================*/
 			// request json
