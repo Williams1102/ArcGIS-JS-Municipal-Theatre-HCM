@@ -1606,6 +1606,44 @@
 				}
 			})
 			/* ======================================HUY CODE =========================================== */
+			const trutuongmoi = new GeoJSONLayer({
+				url: "http://localhost:3000/trutuongmoi"
+			});
+			const chantrutuongmoi = new GeoJSONLayer({
+				url: "http://localhost:3000/chantrutuongmoi"
+			});
+			trutuongmoi.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 0.89623880789895338,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+			chantrutuongmoi.renderer = {
+				type: "simple",
+				symbol: {
+					type: "polygon-3d",
+					symbolLayers: [
+						{
+							type: "extrude",
+							size: 1.093255986030276,
+							material: {
+								color: "white"
+							}
+						}
+					]
+				}
+			};
+			map.layers.add(trutuongmoi);
+			map.layers.add(chantrutuongmoi);
 			getGeoJsonData("MaiSauPhiaDuoi_1", {
 				type: "simple",
 				symbol: {
@@ -1655,6 +1693,7 @@
 			})
 
 			getJsonData("maichephiasau");
+			getJsonData("maichephiasau1");
 			getGeoJsonData("congngoaiphiasaubentrai", {
 				type: "simple",
 				symbol: {
