@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/23001b278b.js" crossorigin="anonymous"></script>
+    <!--Get your code at fontawesome.com-->
+    <script async src="./processing/script/article.js"></script>
+    <script defer src="./processing/script/sidebar.js"></script>
+    <script defer src="./processing/script/lienheform.js"></script>
+    <script defer src="./processing/script/scrolltotop.js"></script>
+    <link rel="stylesheet" href="./processing/style/header.css">
+    <link rel="stylesheet" href="./processing/style/main.css">
+    <link rel="stylesheet" href="./processing/style/all.css">
+    <link rel="stylesheet" href="./processing/style/footer.css">
+</head>
+
+<body>
+    <div id="btt-btn" onclick="window.scrollTo(0, 0);">
+        <i class="fa-solid fa-house"></i>
+    </div>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <logo>
+                    <span>B E N T H A N H</span>
+                    <span style="font-size: 11px; font-weight: lighter">MARKET</span>
+                </logo>
+                <div class="nav-items">
+                    <a style="font-family: myFont3" href="#top">TRANG CHỦ</a>
+                    <a style="font-family: myFont3" href="#gt">GIỚI THIỆU</a>
+                    <a style="font-family: myFont3" href="./3Dview/benthanh.html">3D VIEW</a>
+                    <a style="font-family: myFont3" href="#lh">LIÊN HỆ</a>
+                    <a style="font-family: myFont3" href="#vt">VỊ TRÍ</a>
+                </div>
+                <div class="nav-sidebar">
+                    <button style="border: none; background-color: transparent; cursor: pointer" id="sidebarbtn">
+                        <i class="fa-solid fa-bars" style="font-size: 28px; color: var(--nav-text-color);"></i>
+                    </button>
+                    <div id="sidebarmenu" class="sidebar-items">
+                        <button
+                            style="padding: 10px; background-color: transparent; align-self: end; width: 60px; border: none; cursor: pointer;"
+                            id="sidebarclosebtn">
+                            <i class="fa-solid fa-xmark"
+                                style="right: 0; font-size: 28px; color: var(--nav-text-color);"></i>
+                        </button>
+                        <a href="#top">Trang chủ</a>
+                        <a href="#gt">Giới thiệu</a>
+                        <a href="./3Dview/benthanh.html">3D View</a>
+                        <a href="#lh">Liên hệ</a>
+                        <a href="#vt">Vị trí</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="main-container">
+            <a name="top"></a>
+            <div class="trangchu">
+                <div class="banner-content">
+                    <h1 style="color: var(--main-text-color-secondary)">BẾN THÀNH</h1>
+                    <p style="color: var(--main-text-color-primary)">Chợ Bến Thành, Sài Gòn là biểu tượng không thể quen
+                        thuộc hơn khi nói đến thành phố mang tên Bác.
+                        Chợ Bến Thành ở đâu? Có gì hay ở Chợ Bến Thành? Cùng tìm hiểu với chúng tôi nào!</p>
+                </div>
+                <div class="banner-buttons">
+                    <div class="button-container">
+                        <button style="
+                        position: relative;
+                        font-size: 1.2vw; 
+                        cursor: pointer; 
+                        border-radius: 5px;
+                        background-color: var(--button-color-primary);
+                        border: none">
+                            <a style="
+                            top: 0; 
+                            left: 0; 
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            position: absolute; 
+                            height: 100%; 
+                            width: 100%;
+                            text-decoration: none; 
+                            color: black;" href="./3Dview/benthanh.html">
+                                3D View
+                            </a>
+                        </button>
+                        <button style="
+                        position: relative;
+                        font-size: 1.2vw; 
+                        color: var(--main-text-color-secondary); 
+                        cursor: pointer; 
+                        border-radius: 5px; 
+                        border: 3px solid var(--main-text-color-secondary); 
+                        background-color: var(--button-color-transparent)">
+                            <a style="
+                            top: 0; 
+                            left: 0; 
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            position: absolute; 
+                            height: 100%; 
+                            width: 100%;
+                            text-decoration: none; 
+                            color: var(--main-text-color-secondary);" href="#gt">
+                                <i style="margin-right: 3%;" class="fa-solid fa-book-open"></i>
+                                Giới
+                                Thiệu
+                            </a>
+                        </button>
+                    </div>
+                </div>
+                <div class="banner-non-used-area"></div>
+            </div>
+
+            <a name="gt"></a>
+            <div id="article" class="gioithieu">
+                <div class="spacer"></div>
+                <h1 style=" text-align: center">GIỚI THIỆU </h1>
+                <div class="spacer"></div>
+            </div>
+
+            <a name="lh"></a>
+            <div class="lienhe">
+                <div class="spacer"></div>
+                <h1 style="text-align: center">LIÊN HỆ</h1>
+                <div class="spacer"></div>
+                <div class="lienhe-container">
+                    <div class="lienhe-info">
+                        <h2 style="text-align: center; padding-bottom: 5%;">Thông tin liên hệ</h2>
+                        <p style="color: var(--main-text-color-tertiary);">
+                            <i style="color: var(--main-text-color-quaternary); margin-right: 5px;"
+                                class="fa-sharp fa-solid fa-envelopes-bulk"></i>
+                            Email: benthanhmarket3d@gmail.com
+                        </p>
+                        <p style="color: var(--main-text-color-tertiary);">
+                            <i style="color: var(--main-text-color-quaternary); margin-right: 5px;"
+                                class="fa-solid fa-phone"></i>
+                            Số điện thoại: 0354895632
+                        </p>
+                        <img src="https://cdn.shopify.com/s/files/1/2402/7369/files/market_large.jpg?v=1539918362"
+                            alt="hinh cho ben thanh 2d">
+                    </div>
+                    <form id="lienheform" class="lienhe-form">
+                        <input id="hovateninput" placeholder="Họ và tên" type="text">
+                        <input id="emailinput" placeholder="email" type="email" pattern="^[a-zA-Z0-9]+@gmail\.com$"
+                            title="Enter a valid gmail address. Ex: abc@gmail.com">
+                        <p style="padding: 0; margin-bottom: 2%; color: var(--main-text-color-secondary)">Nếu bạn muốn
+                            đóng góp, liên hệ hãy điền xuống phía dưới. Chúng tôi sẽ phản hồi yêu cầu của bạn</p>
+                        <textarea id="ykieninput" placeholder="Lời nhắn" name="" id="" cols="30" rows="10"></textarea>
+                        <button id="lienheformbtn" type="submit">Gửi</button>
+                    </form>
+                </div>
+                <div class="spacer"></div>
+            </div>
+
+            <a name="vt"></a>
+            <div class="vitri">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.2312403776427!2d106.80086541380096!3d10.870008892258056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527587e9ad5bf%3A0xafa66f9c8be3c91!2sUniversity%20of%20Information%20Technology%20-%20VNUHCM!5e0!3m2!1sen!2s!4v1668437859569!5m2!1sen!2s"
+                    width="100%" height="600px" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="address-container">
+                <logo>
+                    <span>B E N T H A N H</span>
+                    <span style="font-size: 11px; font-weight: lighter">MARKET</span>
+                </logo>
+                <hr>
+                <address>
+                    <i style="margin-right: 5px;" class="fa-regular fa-compass"></i>
+                    Trường Đại học Công Nghệ Thông Tin, Đại học quốc gia TP. Hồ Chí Minh <br>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbspĐường Kha Vạn Canh, Linh Đông, Thủ Đức, TP. Hồ Chí Minh <br><br>
+                    <i style="margin-right: 5px;" class="fa-solid fa-phone"></i> +86 6666 6666 <br><br>
+                    <i style="margin-right: 5px;" class="fa-solid fa-envelope-open"></i> benthanhmarket3d@gmail.com
+                </address>
+            </div>
+            <div class="threeDview-container">
+                <h3>3D View</h3>
+                <div class="threeDview-links-group">
+                    <a href="./3Dview/benthanh.html">Xem chợ dưới dạng 3D</a>
+                    <a href="#">Xem khu vực bán hàng</a>
+                </div>
+            </div>
+            <div class="mangxahoi-container">
+                <h3>Mạng xã hội</h3>
+                <div class="mangxahoi-icons-group">
+                    <i class="fa-brands fa-facebook-f"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-linkedin-in"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

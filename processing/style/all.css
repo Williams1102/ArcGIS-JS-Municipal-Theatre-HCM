@@ -1,0 +1,193 @@
+/* thiet lap dau trang - start */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* thiet lap dau trang - end */
+
+
+/* logo web - start */
+logo {
+    color: var(--nav-text-color);
+    font-weight: bold;
+    font-size: 25px;
+}
+
+logo>* {
+    margin: 2px;
+    display: block;
+}
+
+/* logo web - end */
+
+
+
+/* thiet lap duong dan cho font chu - start */
+@font-face {
+    font-family: myFont1;
+    src: url(../font/testfont/Roboto-Medium.ttf);
+}
+
+@font-face {
+    font-family: myFont2;
+    src: url(../font/testfont/Roboto-Bold.ttf);
+}
+
+@font-face {
+    font-family: myFont3;
+    src: url(../font/testfont/Roboto-Light.ttf);
+}
+
+/* thiet lap duong dan cho font chu - end */
+
+
+
+/* Thiet lap chung cac tag - start */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+    /*xoa default margin, padding*/
+}
+
+input,
+textarea,
+button,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Arial, Helvetica, sans-serif;
+    /*chinh font cho cac tag chua primary text*/
+}
+
+logo,
+address {
+    font-family: Arial, Helvetica, sans-serif;
+    /*chinh font cho cac tag khac*/
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Thiet lap font su dung cho cac tag - end */
+
+
+/* thiet lap mau sac - start */
+:root {
+    /*nav*/
+    --nav-background-color: rgb(49, 79, 100);
+    --nav-text-color: white;
+    --nav-link-text-hover-color: rgb(235, 255, 250);
+    --nav-sidebar-background-color: rgb(49, 79, 100);
+
+    /*main color*/
+    --main-background-color-primary: white;
+    --main-background-color-secondary: rgb(0, 67, 110);
+
+    --main-text-color-primary: black; 
+    --main-text-color-secondary: white;
+    --main-text-color-tertiary: rgb(121, 174, 207);
+    --main-text-color-quaternary: rgb(0, 67, 110);
+
+    /*footer color*/
+    --footer-text-color-primary: white;
+    --footer-background-color-primary: black;
+
+    /*button color*/
+    --button-color-primary: white;
+    --button-color-secondary: orange;
+    --button-color-transparent: transparent;
+}
+
+/* thiet lap mau sac - end */
+
+
+/* back to top button - start */
+#btt-btn {
+    position: fixed;
+    display: none;
+    bottom: 5%;
+    right: 5%;
+    cursor: pointer;
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 35px;
+    animation-name: fade-in;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+#btt-btn:hover {
+    transform: scale(1.1);
+}
+
+#btt-btn i {
+    line-height: 70px;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 100%;
+    }
+
+    to {
+        opacity: 0%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #btt-btn {
+        position: fixed;
+        display: none;
+        bottom: 5%;
+        right: 5%;
+        cursor: pointer;
+        height: 35px;
+        width: 35px;
+        background-color: black;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 17.5px;
+        animation-name: fade-eff;
+        animation-duration: 1s;
+    }
+
+    #btt-btn i {
+        line-height: 35px;
+    }
+}
+
+/* back to top button - end */

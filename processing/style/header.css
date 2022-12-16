@@ -1,0 +1,135 @@
+/*nav*/
+.nav-container {
+    display: flex;
+    background-color: var(--nav-background-color);
+    height: 60px;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100vw;
+    padding: 0px 5%;
+}
+
+.nav-container .nav-sidebar {
+    display: none;
+}
+
+.nav-container .nav-items {
+    display: flex;
+    justify-content: space-around;
+    min-width: 60%;
+}
+
+.nav-container .nav-items a {
+    text-decoration: none;
+    color: var(--nav-text-color);
+    font-size: 17px;
+    padding: 10px;
+    margin: 0 3%;
+}
+
+.nav-container .nav-items a:hover {
+    text-decoration: none;
+    color: var(--nav-link-text-hover-color);
+    transform: scale(1.1);
+    padding: 10px;
+    margin: 0 3%;
+}
+
+.nav-container .nav-sidebar .sidebar-items {
+    background-color: var(--nav-sidebar-background-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-width: 40%;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    animation-name: sidebarmovein;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes sidebarmovein {
+    from {
+        right: -49%;
+    }
+
+    to {
+        right: -49%;
+    }
+}
+
+@keyframes sidebarmoveout {
+    from {
+        right: -49%;
+    }
+
+    to {
+        right: 0;
+    }
+}
+
+.nav-container .nav-sidebar .sidebar-items a {
+    text-decoration: none;
+    color: var(--nav-text-color);
+    font-size: 17px;
+    padding: 10px 30px;
+    margin: 3% 0;
+}
+
+.nav-container .nav-sidebar .sidebar-items a:hover {
+    text-decoration: none;
+    color: var(--nav-link-text-hover-color);
+    font-size: 19px;
+    padding: 10px 30px;
+    margin: 3% 0;
+}
+
+@media screen and (max-width: 1000px) {
+    .nav-container .nav-sidebar {
+        display: block;
+    }
+
+    .nav-container .nav-items {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .nav-container .nav-sidebar .sidebar-items {
+        background-color: var(--nav-sidebar-background-color);
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        min-width: 70%;
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        right: 0;
+        animation-name: sidebarmovein;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes sidebarmovein {
+        from {
+            right: -70%;
+        }
+
+        to {
+            right: -70%;
+        }
+    }
+
+    @keyframes sidebarmoveout {
+        from {
+            right: -70%;
+        }
+
+        to {
+            right: 0;
+        }
+    }
+}

@@ -1,0 +1,291 @@
+/*main util (sai chung cho cac div trong main) -- start*/
+.spacer {
+    padding: 2.5% 0;
+    /*khoang trang giua cac phan*/
+}
+
+/*main util -- end*/
+
+
+
+/*Trang Chu--start*/
+.main-container {
+    width: 100vw;
+}
+
+.main-container .trangchu {
+    width: 100%;
+    height: 768px;
+    background-image: url(../../assets/cho-Ben-Thanh.jpg);
+    background-size: 100vw auto;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container .trangchu .banner-content {
+    width: 50%;
+    font-size: 1.5vw;
+    padding: 10% 10% 50px 5%;
+}
+
+.main-container .trangchu .banner-buttons {
+    width: 40%;
+    padding-left: 5%;
+    padding-bottom: 10%;
+}
+
+.main-container .trangchu .banner-buttons .button-container>*:hover {
+    transform: scale(1.1);
+}
+
+.main-container .trangchu .banner-buttons .button-container>* {
+    width: 30%;
+    height: 50px;
+    padding: 5px 10px;
+    margin-right: 50px;
+}
+
+@media screen and (max-width: 1350px) {
+    .main-container .trangchu {
+        width: 100%;
+        height: auto;
+        background-image: url(../../assets/cho-Ben-Thanh.jpg);
+        background-size: 100vw auto;
+        background-repeat: no-repeat;
+
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .main-container .trangchu {
+        width: 100%;
+        height: auto;
+        background-image: url(../../assets/cho-Ben-Thanh.jpg);
+        background-size: 100vw auto;
+        background-repeat: no-repeat;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-container .trangchu .banner-content {
+        width: 35%;
+        font-size: 1.5vw;
+        padding: 10% 10% 5% 5%;
+    }
+
+    .main-container .trangchu .banner-buttons {
+        padding-bottom: 7%;
+    }
+
+    .main-container .trangchu .banner-buttons .button-container>* {
+        width: 50%;
+        height: 40px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .main-container .trangchu .banner-buttons .button-container>* {
+        width: 50%;
+        height: 30px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+    }
+}
+
+/*Trang Chu--end*/
+
+
+
+/*Gioi Thieu--start*/
+.main-container .gioithieu {
+    width: 100%;
+    background-color: var(--main-background-color-primary);
+}
+
+.main-container .gioithieu container {
+    display: flex;
+    margin: 0% 5%;
+}
+
+.main-container .gioithieu reversecontainer {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0% 5%;
+}
+
+.main-container .gioithieu container,
+reversecontainer>* {
+    margin-bottom: 5%;
+}
+
+.main-container .gioithieu container img {
+    width: 40%;
+    height: auto;
+}
+
+.main-container .gioithieu reversecontainer img {
+    width: 40%;
+    height: auto;
+}
+
+
+.main-container .gioithieu container .gioithieu-image {
+    max-width: 40%;
+    margin-right: 5%;
+}
+
+.main-container .gioithieu container .gioithieu-content {
+    width: 60%;
+    white-space: pre-line;
+    font-family: myFont1;
+}
+
+.main-container .gioithieu reversecontainer .gioithieu-image {
+    max-width: 40%;
+    margin-left: 5%;
+}
+
+.main-container .gioithieu reversecontainer .gioithieu-content {
+    width: 60%;
+    white-space: pre-line;
+    font-family: myFont1;
+}
+
+@media screen and (max-width: 1000px) {
+    .main-container .gioithieu container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-container .gioithieu reversecontainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-container .gioithieu container .gioithieu-image {
+        min-width: 100%;
+        margin: 5% 0;
+    }
+
+    .main-container .gioithieu container .gioithieu-content {
+        min-width: 100%;
+        white-space: pre-line;
+        font-family: myFont1;
+    }
+
+    .main-container .gioithieu reversecontainer .gioithieu-image {
+        min-width: 100%;
+        margin: 5% 0;
+    }
+
+    .main-container .gioithieu reversecontainer .gioithieu-content {
+        min-width: 100%;
+        white-space: pre-line;
+        font-family: myFont1;
+    }
+}
+
+/*Gioi Thieu--end*/
+
+
+
+/*Lien He--start*/
+.main-container .lienhe {
+    background-color: var(--main-background-color-secondary);
+}
+
+.main-container .lienhe h1 {
+    color: var(--main-text-color-secondary);
+    margin: 0;
+}
+
+.main-container .lienhe .lienhe-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.main-container .lienhe .lienhe-container .lienhe-info {
+    background-color: var(--main-background-color-primary);
+    color: var(--main-text-color-primary);
+    border-radius: 10px;
+    width: 40%;
+    height: 100%;
+    padding: 2% 5%;
+}
+
+.main-container .lienhe .lienhe-container .lienhe-info img {
+    display: block;
+    margin: 10% auto;
+    width: 65%;
+    height: auto;
+}
+
+.main-container .lienhe .lienhe-container .lienhe-form {
+    border-radius: 10px;
+    width: 40%;
+}
+
+.main-container .lienhe .lienhe-container .lienhe-form>* {
+    margin-bottom: 5%;
+}
+
+.main-container .lienhe .lienhe-container .lienhe-form button {
+    background-color: var(--button-color-secondary);
+    color: var(--main-text-color-secondary);
+    font-size: large;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    padding: 17px 0px;
+}
+
+.main-container .lienhe .lienhe-container .lienhe-form button:hover {
+    transform: scale(1.04);
+}
+
+.main-container .lienhe .lienhe-container .lienhe-form input {
+    width: 100%;
+    padding: 17px;
+    border: none;
+    border-radius: 10px;
+}
+
+.main-container .lienhe .lienhe-container .lienhe-form textarea {
+    padding: 17px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 800px) {
+    .main-container .lienhe .lienhe-container {
+        padding: 0 5%;
+        flex-direction: column;
+    }
+
+    .main-container .lienhe .lienhe-container .lienhe-info {
+        width: 100%;
+        margin-bottom: 5%;
+    }
+
+    .main-container .lienhe .lienhe-container .lienhe-form {
+        width: 100%;
+    }
+
+    .main-container .lienhe .lienhe-container .lienhe-info img,
+    h2 {
+        display: none;
+    }
+}
+
+/*Lien He--end*/
